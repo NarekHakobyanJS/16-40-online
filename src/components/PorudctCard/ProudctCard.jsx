@@ -6,7 +6,7 @@ const ProudctCard = ({product, addToCard}) => {
 
   
   const handleToCard = (product) => {
-    addToCard(product, product.id)
+    addToCard(product)
   }
 
   return (

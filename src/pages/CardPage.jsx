@@ -1,13 +1,16 @@
 import React from 'react'
+import CardItem from '../components/CardItem/CardItem'
 
-const CardPage = ({card}) => {
+const CardPage = ({cards, changeCardPriceAndCount}) => {
   return (
     <div>
-        {
-            card.map((c) => {
-                return <li>{c.title}</li>
+      <div className='cards-item'>
+      {
+            cards.map((card) => {
+                return <CardItem key={card.id} card={card} changeCardPriceAndCount={changeCardPriceAndCount}/>
             })  
         }
+      </div>
     </div>
   )
 }

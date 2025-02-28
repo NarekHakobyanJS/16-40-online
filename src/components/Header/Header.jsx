@@ -2,17 +2,26 @@ import React from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 
 import './Header.css'
-import { NavLink } from 'react-router-dom';
-const Header = () => {
+import { NavLink, useLocation } from 'react-router-dom';
+
+const Header = ({cards}) => {
+
+  let {pathname} = useLocation()
+
+
   return (
     <header>
       <div>
         <h1>Logo</h1>
       </div>
       <div className='cart-item'>
-        <NavLink to='/card'>
+        {
+          pathname === '/card' || <NavLink to='/card'>
           <FaShoppingCart />
+          <sub>{cards.length}</sub>
         </NavLink>
+        }
+        
       </div>
     </header>
   )
