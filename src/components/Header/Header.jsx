@@ -21,7 +21,9 @@ const Header = ({cards}) => {
           <sub>{cards.length}</sub>
         </NavLink>
         }
-        
+        <button>
+          <NavLink to='/login'>Login</NavLink>
+        </button>
       </div>
     </header>
   )

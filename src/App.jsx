@@ -1,20 +1,34 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
+import axios from 'axios'
 import './App.css'
 import Layout from './components/Layout/Layout'
 import { useEffect, useState } from 'react'
 import HomePage from './pages/HomePage'
 import CardPage from './pages/CardPage'
+import ProductPage from './pages/ProductPage'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+
+
+
+export const instance = axios.create({
+  baseURL : 'https://fakestoreapi.com'
+})
 
 function App() {
+  const [users, setUsers] = useState([
+    {id : 1, name : "Ashot", email : 'ashot@gmail.com', password : '1234'},
+    {id : 1, name : "Valod", email : 'valod@gmail.com', password : '1234'},
+  ])
 
   const [products, setProducts] = useState([])
   const [cards, setCards] = useState([])
 
  
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then((res) => res.json())
-      .then((res) => setProducts(res.map((prod) => {
+
+    instance.get('/products')
+      .then((res) =>  setProducts(res.data.map((prod) => {
         return {
           ...prod,
           count: 1,
@@ -40,7 +54,7 @@ function App() {
 
 
 
-  console.log(cards);
+
   
   const addToCard = (item) => {
 
@@ -77,7 +91,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout cards={cards}/>}>
           <Route index element={<HomePage products={products} addToCard={addToCard} />} />
+          <Route path='/login' element={<Login users={users}/> }/>
           <Route path='/card' element={<CardPage cards={cards} changeCardPriceAndCount={changeCardPriceAndCount} />} />
+          <Route path='/:id' element={<ProductPage /> }/>
+          <Route path='/profile' element={<Profile /> }/>
         </Route>
       </Routes>
     </div>

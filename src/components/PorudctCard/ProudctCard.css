@@ -7,6 +7,6 @@
     justify-content: space-between;
 }
 
-.product > img{
+.product > a > img{
     width: 150px;
 }
